@@ -42,13 +42,19 @@ RUN echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repos
     php7-fileinfo \
     php7-tokenizer \
     php7-simplexml \
+    php7-imagick \
     openssl-dev \
     ca-certificates \
     dialog \
     nodejs \
-    nodejs-npm && \
+    nodejs-npm \
+    imagemagick \
+    chromium@edge && \
     mkdir -p /var/www/app && \
     mkdir -p /var/log/supervisor
+
+# Skip downloading Chromium when installing puppeteer. We'll use the installed package.
+ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 
 ADD conf/supervisord.conf /etc/supervisord.conf
 
