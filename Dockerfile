@@ -69,4 +69,8 @@ RUN sed -i \
 # Add Scripts
 ADD scripts/start.sh /start.sh
 
+# Add user nginx
+RUN addgroup -S nginx && \
+    adduser -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx nginx
+
 CMD ["/start.sh"]
