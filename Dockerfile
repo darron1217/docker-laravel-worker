@@ -48,6 +48,8 @@ RUN echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repos
     dialog \
     nodejs \
     nodejs-npm \
+    ttf-droid \
+    ttf-droid-nonlatin \
     imagemagick \
     chromium@edge && \
     mkdir -p /var/www/app && \
