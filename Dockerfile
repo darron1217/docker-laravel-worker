@@ -55,6 +55,21 @@ RUN echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repos
     mkdir -p /var/www/app && \
     mkdir -p /var/log/supervisor
 
+# Install GUI packages
+RUN apk add --no-cache \
+      xfce4 xrdp xvfb xauth \
+      faenza-icon-theme paper-gtk-theme paper-icon-theme slim xf86-input-synaptics xf86-input-mouse xf86-input-keyboard \
+      setxkbmap \
+      x11vnc@edge && \
+      echo "setxkbmap dvorak" >> /root/.xinitrc && \
+      echo "exec startxfce4" >> /root/.xinitrc && \
+      echo root:root | chpasswd && \
+      xrdp-keygen xrdp auto
+
+# xrdp config
+ADD conf/root/ /root
+ADD conf/etc/xrdp /etc/xrdp
+
 # Skip downloading Chromium when installing puppeteer. We'll use the installed package.
 ENV PUPPETEER_SKIP_CHROMIUM_DOWNLOAD true
 
@@ -80,5 +95,7 @@ ADD scripts/start.sh /start.sh
 # Add user nginx
 RUN addgroup -S nginx && \
     adduser -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx nginx
+
+EXPOSE 3389
 
 CMD ["/start.sh"]
