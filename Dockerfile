@@ -4,8 +4,8 @@ MAINTAINER darron1217 <darron1217@gmail.com>
 
 ENV php_conf /etc/php7/php.ini
 
-RUN echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repositories && \
-    echo @edge http://nl.alpinelinux.org/alpine/edge/main >> /etc/apk/repositories && \
+RUN echo @v3.8 http://nl.alpinelinux.org/alpine/v3.8/community >> /etc/apk/repositories && \
+    echo @v3.8 http://nl.alpinelinux.org/alpine/v3.8/main >> /etc/apk/repositories && \
     apk update && \
     apk add --no-cache bash \
     openssh-client \
@@ -51,7 +51,7 @@ RUN echo @edge http://nl.alpinelinux.org/alpine/edge/community >> /etc/apk/repos
     ttf-droid \
     ttf-droid-nonlatin \
     imagemagick \
-    chromium@edge && \
+    chromium@v3.8 && \
     mkdir -p /var/www/app && \
     mkdir -p /var/log/supervisor
 
