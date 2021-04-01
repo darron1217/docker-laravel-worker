@@ -71,6 +71,6 @@ ADD scripts/start.sh /start.sh
 
 # Add user nginx
 RUN addgroup -S nginx && \
-    adduser -D -S -h /var/cache/nginx -s /sbin/nologin -G nginx nginx
+    adduser -D -S -h /var/cache/nginx -u 101 -g 101 -s /sbin/nologin -G nginx nginx
 
 CMD ["/start.sh"]
